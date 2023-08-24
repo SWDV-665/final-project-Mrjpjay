@@ -1,14 +1,19 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Groceries
+    <ion-title style="text-align: center">
+      ContactSphere 👥
     </ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
-  <ion-content padding>
+    <!-- Check if items array is empty and show image if true -->
+<div *ngIf="items?.length === 0" style="text-align: center;">
+  <img src="assets/imgs/contact.png"/>
+  <p style="color: gray;">No contacts available.</p>
+</div>
+
     <ion-list>
 
       <ion-item-sliding *ngFor="let item of items; let i = index">
@@ -28,14 +33,9 @@
             Edit
           </button>
 
-          <button (click)="removeItem(item._id)" ion-button color="secondary" icon-start>
+          <button (click)="removeItem(item._id)" ion-button color="danger" icon-start>
             <ion-icon name="trash"></ion-icon>
             Done
-          </button>
-
-          <button (click)="shareItem(item, i)" ion-button color="light" icon-start>
-            <ion-icon name="share"></ion-icon>
-            Share
           </button>
           
         </ion-item-options>
