@@ -26,9 +26,25 @@ export class InputDialogServiceProvider {
           value: item ? item.name : null
         },
         {
-          name: 'quantity',
-          placeholder: 'Quantity',
-          value: item ? item.quantity : null
+          name: 'lastName',
+          placeholder: 'LastName',
+          value: item ? item.lastName : null
+        },
+        {
+          name: 'email',
+          placeholder: 'Email',
+          value: item ? item.email : null
+        },
+        {
+          name: 'phoneNumber',
+          placeholder: 'PhoneNumber',
+          value: item ? item.phoneNumber : null
+        },
+
+        {
+          name: 'description',
+          placeholder: 'Description',
+          value: item ? item.description : null
         }
       ],
       buttons: [
@@ -43,7 +59,10 @@ export class InputDialogServiceProvider {
           handler: data => {
             if (index !== undefined) {
               item.name = data.name;
-              item.quantity = data.quantity;
+              item.lastName = data.lastName;
+              item.email = data.email;
+              item.phoneNumber = data.phoneNumber;
+              item.description = data.description;
               this.dataService.editItem(item, index);
             } else {
               this.dataService.addItem(data);

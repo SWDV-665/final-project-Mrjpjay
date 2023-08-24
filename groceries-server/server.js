@@ -25,7 +25,10 @@ app.use(function (req, res, next) {
 // Model
 var Grocery = mongoose.model('Grocery', {
     name: String,
-    quantity: Number
+    lastName: String,
+    email: String,
+    phoneNumber: Number,
+    description: String
 });
 
 
@@ -53,7 +56,10 @@ app.post('/api/groceries', function (req, res) {
 
     Grocery.create({
         name: req.body.name,
-        quantity: req.body.quantity,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        description: req.body.description,
         done: false
     }, function (err, grocery) {
         if (err) {
@@ -74,7 +80,10 @@ app.post('/api/groceries', function (req, res) {
 app.put('/api/groceries/:id', function (req, res) {
     const grocery = {
         name: req.body.name,
-        quantity: req.body.quantity
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phoneNumber: req.body.phoneNumber,
+        description: req.body.description
     };
     console.log("Updating item - ", req.params.id);
     Grocery.update({_id: req.params.id}, grocery, function (err, raw) {
