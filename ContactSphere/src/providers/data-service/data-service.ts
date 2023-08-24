@@ -30,7 +30,7 @@ export class DataServiceProvider {
   }
 
   editItem(item, index){
-    this.httpClient.put(this.baseUrl + "/api/groceries/" + item._id, item).subscribe(res => {
+    this.httpClient.put(this.baseUrl + "/api/contacts/" + item._id, item).subscribe(res => {
       this.items = res;
       this.dataChanchedSubject.next(true);
       console.log(res.toString);
@@ -41,7 +41,7 @@ export class DataServiceProvider {
   }
   
   addItem(data){
-    this.httpClient.post(this.baseUrl + "/api/groceries", data).subscribe(res =>{
+    this.httpClient.post(this.baseUrl + "/api/contacts", data).subscribe(res =>{
       this.items = res;
       this.dataChanchedSubject.next(true);
     },
@@ -52,7 +52,7 @@ export class DataServiceProvider {
   }
 
   removeItem(id){
-    this.httpClient.delete(this.baseUrl + "/api/groceries/" + id).subscribe(res =>{
+    this.httpClient.delete(this.baseUrl + "/api/contacts/" + id).subscribe(res =>{
       this.items = res;
       this.dataChanchedSubject.next(true);
     },
@@ -62,7 +62,7 @@ export class DataServiceProvider {
   }
 
   getItems(): Observable<object[]> {
-    return this.httpClient.get(this.baseUrl + '/api/groceries').pipe(
+    return this.httpClient.get(this.baseUrl + '/api/contacts').pipe(
       map(this.exctractData),
       catchError(this.handleError)
     );

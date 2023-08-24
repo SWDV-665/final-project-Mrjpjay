@@ -7,7 +7,7 @@ var methodOverride = require('method-override');
 var cors = require('cors');
 
 // Configuration
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/groceries");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/contacts");
 
 app.use(bodyParser.urlencoded({'extended': 'true'}));
 app.use(bodyParser.json());
@@ -23,7 +23,7 @@ app.use(function (req, res, next) {
 });
 
 // Model
-var Grocery = mongoose.model('Grocery', {
+var Contact = mongoose.model('Contact', {
     name: String,
     lastName: String,
     email: String,
@@ -32,53 +32,53 @@ var Grocery = mongoose.model('Grocery', {
 });
 
 
-// Get all grocery items
-app.get('/api/groceries', function (req, res) {
+// Get all contact items
+app.get('/api/contacts', function (req, res) {
 
-    console.log("Listing groceries items...");
+    console.log("Listing contacts items...");
 
-    //use mongoose to get all groceries in the database
-    Grocery.find(function (err, groceries) {
+    //use mongoose to get all contacts in the database
+    Contact.find(function (err, contacts) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
             res.send(err);
         }
 
-        res.json(groceries); // return all groceries in JSON format
+        res.json(contacts); // return all contacts in JSON format
     });
 });
 
-// Create a grocery Item
-app.post('/api/groceries', function (req, res) {
+// Create a contact Item
+app.post('/api/contacts', function (req, res) {
 
-    console.log("Creating grocery item...");
+    console.log("Creating contact item...");
 
-    Grocery.create({
+    Contact.create({
         name: req.body.name,
         lastName: req.body.lastName,
         email: req.body.email,
         phoneNumber: req.body.phoneNumber,
         description: req.body.description,
         done: false
-    }, function (err, grocery) {
+    }, function (err, contact) {
         if (err) {
             res.send(err);
         }
 
-        // create and return all the groceries
-        Grocery.find(function (err, groceries) {
+        // create and return all the contacts
+        Contact.find(function (err, contacts) {
             if (err)
                 res.send(err);
-            res.json(groceries);
+            res.json(contacts);
         });
     });
 
 });
 
-// Update a grocery Item
-app.put('/api/groceries/:id', function (req, res) {
-    const grocery = {
+// Update a contact Item
+app.put('/api/contacts/:id', function (req, res) {
+    const contact = {
         name: req.body.name,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -86,7 +86,7 @@ app.put('/api/groceries/:id', function (req, res) {
         description: req.body.description
     };
     console.log("Updating item - ", req.params.id);
-    Grocery.update({_id: req.params.id}, grocery, function (err, raw) {
+    Contact.update({_id: req.params.id}, contact, function (err, raw) {
         if (err) {
             res.send(err);
         }
@@ -95,21 +95,21 @@ app.put('/api/groceries/:id', function (req, res) {
 });
 
 
-// Delete a grocery Item
-app.delete('/api/groceries/:id', function (req, res) {
-    Grocery.remove({
+// Delete a contact Item
+app.delete('/api/contacts/:id', function (req, res) {
+    Contact.remove({
         _id: req.params.id
-    }, function (err, grocery) {
+    }, function (err, contact) {
         if (err) {
-            console.error("Error deleting grocery ", err);
+            console.error("Error deleting contact ", err);
         }
         else {
-            Grocery.find(function (err, groceries) {
+            Contact.find(function (err, contacts) {
                 if (err) {
                     res.send(err);
                 }
                 else {
-                    res.json(groceries);
+                    res.json(contacts);
                 }
             });
         }
@@ -119,4 +119,4 @@ app.delete('/api/groceries/:id', function (req, res) {
 
 // Start app and listen on port 8080  
 app.listen(process.env.PORT || 8080);
-console.log("Grocery server listening on port  - ", (process.env.PORT || 8080));
+console.log("Contact server listening on port  - ", (process.env.PORT || 8080));
