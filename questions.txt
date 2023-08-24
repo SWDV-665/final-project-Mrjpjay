@@ -1,0 +1,12 @@
+
+    GitHub repository URL where you pushed your code
+- https://github.com/SWDV-665/final-project-Mrjpjay/tree/master
+
+    How many hours do you estimate you used completing this assignment?
+- at least 12
+
+    What was easiest for you when completing this assignment?
+- making the minimal UI changes
+
+    What was the most difficult challenge you experienced when completing this assignment?
+- updating the grocerie-server to work with contacts
